@@ -6,6 +6,5 @@ class Aircraft :
 public:
 	Aircraft();
 	~Aircraft();
-
 };
 

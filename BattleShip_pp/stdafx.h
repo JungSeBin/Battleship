@@ -2,17 +2,11 @@
 // 표준 시스템 포함 파일 및 프로젝트 관련 포함 파일이
 // 들어 있는 포함 파일입니다.
 //
+
 #pragma once
 
 #include "targetver.h"
-
-#include "Aircraft.h"
-#include "Battleship.h"
-#include "Cruiser.h"
-#include "Destroyer.h"
-#include "Submarine.h"
-#include "Map.h"
-#include "Ship.h"
+#include <iostream>
 #include <stdio.h>
 #include <tchar.h>
 

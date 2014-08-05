@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{88b17dad-9560-4680-8540-3b3d98601ad2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ship">
+      <UniqueIdentifier>{1ac4ace3-bc0f-4c5c-a78e-ae4132144a36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -24,67 +30,55 @@
     <ClInclude Include="targetver.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Ship.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="Player.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Aircraft.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Ship</Filter>
     </ClInclude>
     <ClInclude Include="Battleship.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Destroyer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Submarine.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Ship</Filter>
     </ClInclude>
     <ClInclude Include="Cruiser.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Destroyer.h">
+      <Filter>Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>Ship</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="BattleShip_pp.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Aircraft.cpp">
+      <Filter>Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Battleship.cpp">
+      <Filter>Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Cruiser.cpp">
+      <Filter>Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="Destroyer.cpp">
+      <Filter>Ship</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Ship.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Aircraft.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Battleship.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Destroyer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Submarine.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Cruiser.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Ship</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -4,6 +4,9 @@
 
 Destroyer::Destroyer()
 {
+	m_Hp = 2;
+	m_Type = DESTROYER;
+	m_Name = "Destroyer";
 }
 
 

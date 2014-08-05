@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BattleShip_pp", "BattleShip_pp\BattleShip_pp.vcxproj", "{D980CA49-E24B-4E63-8256-D191A632BA0C}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BattleShip_개인", "BattleShip_개인\BattleShip_개인.vcxproj", "{F630B326-F0F3-41A7-8459-2A19C38CB637}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Battleship_test.cpp", "Battleship_test.cpp\Battleship_test.cpp.vcxproj", "{FB4749E4-8E9B-4CFF-ABE7-B748577A0711}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BattleShip_pp", "Battleship_test.cpp\Battleship_test.cpp.vcxproj", "{FB4749E4-8E9B-4CFF-ABE7-B748577A0711}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +13,6 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D980CA49-E24B-4E63-8256-D191A632BA0C}.Debug|Win32.ActiveCfg = Debug|Win32
-		{D980CA49-E24B-4E63-8256-D191A632BA0C}.Debug|Win32.Build.0 = Debug|Win32
-		{D980CA49-E24B-4E63-8256-D191A632BA0C}.Release|Win32.ActiveCfg = Release|Win32
-		{D980CA49-E24B-4E63-8256-D191A632BA0C}.Release|Win32.Build.0 = Release|Win32
 		{F630B326-F0F3-41A7-8459-2A19C38CB637}.Debug|Win32.ActiveCfg = Debug|Win32
 		{F630B326-F0F3-41A7-8459-2A19C38CB637}.Debug|Win32.Build.0 = Debug|Win32
 		{F630B326-F0F3-41A7-8459-2A19C38CB637}.Release|Win32.ActiveCfg = Release|Win32

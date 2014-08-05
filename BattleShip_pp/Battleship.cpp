@@ -4,6 +4,9 @@
 
 Battleship::Battleship()
 {
+	m_Hp = 4;
+	m_Type = BATTLESHIP;
+	m_Name = "Battleship";
 }
 
 
