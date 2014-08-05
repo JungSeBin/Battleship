@@ -13,6 +13,7 @@ public:
 
 	void SetupShips();
 	void PrintShips();
+	void RandShips(int MaxSize);
 
 private:
 	Aircraft	m_Aircraft;
