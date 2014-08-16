@@ -1,10 +1,18 @@
 #include "stdafx.h"
 #include "Player.h"
+#include <conio.h>
 #include <time.h>
+
+#pragma warning(disable:4996)
 
 
 Player::Player()
 {
+	m_Ship[0] = &m_Aircraft;
+	m_Ship[1] = &m_Battleship;
+	m_Ship[2] = &m_Cruiser;
+	m_Ship[3] = &m_Destroyer[0];
+	m_Ship[4] = &m_Destroyer[1];
 }
 
 
@@ -12,20 +20,19 @@ Player::~Player()
 {
 }
 
-int horizon;
-char x, y;
+
 
 void Player::SetupShips()
 {
 
 	// °¡Áö°í ÀÖ´Â ¹èµéÀ» ÁÂÇ¥¸¦ Åä´ë·Î ¹èÄ¡ÇÑ´Ù
-	int A_MaxSize = m_Aircraft.getHP();
-	int B_MaxSize = m_Battleship.getHP();
-	int C_MaxSize = m_Cruiser.getHP();
-	int D_MaxSize = m_Destroyer[0].getHP();
+	int A_Hp = m_Aircraft.getHP();
+	int B_Hp = m_Battleship.getHP();
+	int C_Hp = m_Cruiser.getHP();
+	int D_Hp = m_Destroyer[0].getHP();
 	
-	RandShips(A_MaxSize); //Aircraft ·£´ý ÁÂÇ¥ ¼³Á¤
-	for (int i = 0; i < A_MaxSize; i++)
+	RandShips(A_Hp); //Aircraft ·£´ý ÁÂÇ¥ ¼³Á¤
+	for (int i = 0; i < A_Hp; ++i)
 	{
 		m_Aircraft.AddPosition(x, y);
 		m_Map.SetPos(x, y);
@@ -38,8 +45,8 @@ void Player::SetupShips()
 			y++;
 		}
 	}
-	RandShips(B_MaxSize); //Battleship ·£´ý ÁÂÇ¥ ¼³Á¤
-	for (int i = 0; i < B_MaxSize; i++)
+	RandShips(B_Hp); //Battleship ·£´ý ÁÂÇ¥ ¼³Á¤
+	for (int i = 0; i < B_Hp; ++i)
 	{
 		m_Battleship.AddPosition(x, y);
 		m_Map.SetPos(x, y);
@@ -52,8 +59,8 @@ void Player::SetupShips()
 			y++;
 		}
 	}
-	RandShips(C_MaxSize); //Cruiser ·£´ý ÁÂÇ¥ ¼³Á¤
-	for (int i = 0; i < C_MaxSize; i++)
+	RandShips(C_Hp); //Cruiser ·£´ý ÁÂÇ¥ ¼³Á¤
+	for (int i = 0; i < C_Hp; ++i)
 	{
 		m_Cruiser.AddPosition(x, y);
 		m_Map.SetPos(x, y);
@@ -67,8 +74,8 @@ void Player::SetupShips()
 		}
 	}
 
-	RandShips(D_MaxSize); //Destroyer1 ·£´ý ÁÂÇ¥ ¼³Á¤
-	for (int i = 0; i < D_MaxSize; i++)
+	RandShips(D_Hp); //Destroyer1 ·£´ý ÁÂÇ¥ ¼³Á¤
+	for (int i = 0; i < D_Hp; ++i)
 	{
 		m_Destroyer[0].AddPosition(x, y);
 		m_Map.SetPos(x, y);
@@ -82,8 +89,8 @@ void Player::SetupShips()
 		}
 	}
 
-	RandShips(D_MaxSize); //Destroyer2 ·£´ý ÁÂÇ¥ ¼³Á¤
-	for (int i = 0; i < D_MaxSize; i++)
+	RandShips(D_Hp); //Destroyer2 ·£´ý ÁÂÇ¥ ¼³Á¤
+	for (int i = 0; i < D_Hp; ++i)
 	{
 		m_Destroyer[1].AddPosition(x, y);
 		m_Map.SetPos(x, y);
@@ -108,7 +115,7 @@ void Player::PrintShips()
 	m_Destroyer[1].PrintPos();
 }
 
-void Player::RandShips(int MaxSize)
+void Player::RandShips(int Ship_Hp)
 {
 	//¹èµéÀÇ ÁÂÇ¥¸¦ ·£´ýÇÏ°Ô ¼³Á¤ÇÑ´Ù.
 	srand((unsigned int)time(NULL));
@@ -117,18 +124,18 @@ void Player::RandShips(int MaxSize)
 
 	while (checker)
 	{
-		x = rand() % 8 + 'A';
-		y = rand() % 8 + '1';
+		x = rand() % MAP_SIZE + 'A';
+		y = rand() % MAP_SIZE + '1';
 		horizon = rand() % 2 ? true : false; //°¡·Î¸é true ¼¼·Î¸é false
 		//for¹®À» À§ÇÑ buffer
-		x_buffer = x + MaxSize;
-		y_buffer = y + MaxSize;
+		x_buffer = x + Ship_Hp;
+		y_buffer = y + Ship_Hp;
 
 		if (horizon)
 		{
 			if (x_buffer <= 'H')
 			{
-				for (; x < x_buffer; x++)
+				for (; x < x_buffer; ++x)
 				{
 					if (m_Map.ShipCheck(x, y))
 					{
@@ -139,13 +146,13 @@ void Player::RandShips(int MaxSize)
 						checker = false;
 				}
 			}
-			x = x - MaxSize;
+			x = x - Ship_Hp;
 		}
 		else
 		{
 			if (y_buffer <= '8')
 			{
-				for (; y < y_buffer; y++)
+				for (; y < y_buffer; ++y)
 				{
 					if (m_Map.ShipCheck(x, y))
 					{
@@ -156,9 +163,39 @@ void Player::RandShips(int MaxSize)
 						checker = false;
 				}
 			}
-			y = y - MaxSize;
+			y = y - Ship_Hp;
 		}
 	}
 
 
+}
+
+Position Player::Attack()
+{
+	Position attackPos;
+
+	printf_s("°ø°ÝÇÒ ÁÂÇ¥ ¼³Á¤:");
+	attackPos.x = getche();
+	attackPos.y = getche();
+	printf_s("\n");
+
+	return attackPos;
+
+	//if (hit == AIRCRAFT_DESTROY)
+	//	printf_s("Aircraft Destroy");
+	//else if (hit == BATTLESHIP_DESTROY)
+	//	printf_s("Battleship Destroy");
+	//else if (hit == CRUISER_DESTROY)
+	//	printf_s("Cruiser Destroy");
+	//else if (hit == DESTROYER_DESTROY)
+	//	printf_s("Destroyer Destroy");
+	//else if (hit == HIT)
+	//	printf_s("Hit");
+	//else
+	//	printf_s("Miss");
+}
+
+Map Player::Defend()
+{
+	return GetMap();
 }

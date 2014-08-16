@@ -5,6 +5,11 @@
 #include "Destroyer.h"
 #include "Map.h"
 
+#define MAP_SIZE 8
+
+static bool horizon;
+static char x, y;
+
 class Player
 {
 public:
@@ -14,8 +19,13 @@ public:
 	void SetupShips();
 	void PrintShips();
 	void RandShips(int MaxSize);
+	Position Attack();
+	Map GetMap(){ return m_Map; }
+	Map Defend();
+	Ship* GetShip(int i){ return m_Ship[i]; }
 
 private:
+	Ship*		m_Ship[5];
 	Aircraft	m_Aircraft;
 	Battleship	m_Battleship;
 	Cruiser		m_Cruiser;

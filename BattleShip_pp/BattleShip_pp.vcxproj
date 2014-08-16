@@ -84,6 +84,7 @@
     <ClInclude Include="Battleship.h" />
     <ClInclude Include="Cruiser.h" />
     <ClInclude Include="Destroyer.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Ship.h" />
@@ -93,6 +94,7 @@
   <ItemGroup>
     <ClCompile Include="Aircraft.cpp" />
     <ClCompile Include="Battleship.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Cruiser.cpp" />
     <ClCompile Include="Destroyer.cpp" />

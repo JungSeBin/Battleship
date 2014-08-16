@@ -21,7 +21,8 @@ void Ship::AddPosition(Position pos)
 	{
 		if (m_Pos[i].x == -1 && m_Pos[i].y == -1)
 		{
-			m_Pos[i] = pos;
+			m_Pos[i].x = pos.x;
+			m_Pos[i].y = pos.y;
 			break;
 		}
 	}
@@ -45,7 +46,7 @@ HitStatus Ship::HitCheck(Position pos)
 {
 	HitStatus returnStatus = MISS;
 
-	for (int i = 0; i < m_Hp; i++)
+	for (int i = 0; i < m_Type; i++)
 	{
 		if (m_Pos[i].x == pos.x&&m_Pos[i].y == pos.y)
 		{

@@ -10,11 +10,11 @@ struct Position{
 enum ShipType
 {
 	SHIPTYPE_NONE,
-	AIRCRAFT,
-	BATTLESHIP,
-	CRUISER,
+	SHIPTYPE_NONEE,
 	DESTROYER,
-	SUBMARINE,
+	CRUISER,
+	BATTLESHIP,
+	AIRCRAFT,
 };
 
 enum HitStatus
