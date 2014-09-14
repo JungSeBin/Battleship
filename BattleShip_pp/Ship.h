@@ -9,8 +9,8 @@ struct Position{
 
 enum ShipType
 {
+	SHIP_NONE,
 	SHIPTYPE_NONE,
-	SHIPTYPE_NONEE,
 	DESTROYER,
 	CRUISER,
 	BATTLESHIP,
@@ -38,7 +38,7 @@ public:
 	void AddPosition(char x, char y);
 	void PrintHp();
 	void PrintPos();
-	int getHP(){ return m_Hp; }
+	int GetHP(){ return m_Hp; }
 	HitStatus HitCheck(Position pos);
 
 protected:

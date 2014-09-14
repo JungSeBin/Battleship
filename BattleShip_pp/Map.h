@@ -1,13 +1,18 @@
 #pragma once
+
+enum MapState{ NONE, SHIP, CHECKED, INVALID_INPUT };
+
 class Map
 {
 public:
 	Map();
 	~Map();
-	void SetPos(char x, char y);
-	bool ShipCheck(char x, char y);
 
-//private:
-	int m_MapPos[8][8];
+public:
+	void SetPosValue(char x, char y, MapState value);
+	MapState GetPosValue(char x, char y);
+
+private:
+	MapState m_MapPos[8][8];
 };
 

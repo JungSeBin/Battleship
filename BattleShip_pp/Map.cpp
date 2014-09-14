@@ -4,7 +4,7 @@
 
 Map::Map()
 {
-	memset(m_MapPos, 0, sizeof(m_MapPos));
+	memset(m_MapPos, NONE, sizeof(m_MapPos));
 }
 
 
@@ -13,15 +13,15 @@ Map::~Map()
 }
 
 
-void Map::SetPos(char x, char y)
+void Map::SetPosValue(char x, char y,MapState value)
 {
-	m_MapPos[x - 'A'][y - '1'] = 1;
+	m_MapPos[x - 'A'][y - '1'] = value;
 	return;
 }
 
-bool Map::ShipCheck(char x, char y)
+MapState Map::GetPosValue(char x, char y)
 {
-	if (m_MapPos[x - 'A'][y - '1'] == 1)
-		return true;
-	return false;
+	if (x <= 'A' || x >= 'H' || y >= '8' || y <= '1')
+		return INVALID_INPUT;
+	return m_MapPos[x - 'A'][y - '1'];
 }

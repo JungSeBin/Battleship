@@ -26,81 +26,23 @@ void Player::SetupShips()
 {
 
 	// 가지고 있는 배들을 좌표를 토대로 배치한다
-	int A_Hp = m_Aircraft.getHP();
-	int B_Hp = m_Battleship.getHP();
-	int C_Hp = m_Cruiser.getHP();
-	int D_Hp = m_Destroyer[0].getHP();
-	
-	RandShips(A_Hp); //Aircraft 랜덤 좌표 설정
-	for (int i = 0; i < A_Hp; ++i)
-	{
-		m_Aircraft.AddPosition(x, y);
-		m_Map.SetPos(x, y);
-		if (horizon)
-		{
-			x++;
-		}
-		else
-		{
-			y++;
-		}
-	}
-	RandShips(B_Hp); //Battleship 랜덤 좌표 설정
-	for (int i = 0; i < B_Hp; ++i)
-	{
-		m_Battleship.AddPosition(x, y);
-		m_Map.SetPos(x, y);
-		if (horizon)
-		{
-			x++;
-		}
-		else
-		{
-			y++;
-		}
-	}
-	RandShips(C_Hp); //Cruiser 랜덤 좌표 설정
-	for (int i = 0; i < C_Hp; ++i)
-	{
-		m_Cruiser.AddPosition(x, y);
-		m_Map.SetPos(x, y);
-		if (horizon)
-		{
-			x++;
-		}
-		else
-		{
-			y++;
-		}
-	}
 
-	RandShips(D_Hp); //Destroyer1 랜덤 좌표 설정
-	for (int i = 0; i < D_Hp; ++i)
+	for (int ship_idx = 0; ship_idx < GetShipNum(); ship_idx++)
 	{
-		m_Destroyer[0].AddPosition(x, y);
-		m_Map.SetPos(x, y);
-		if (horizon)
+		int hp = m_Ship[ship_idx]->GetHP();
+		RandShips(hp); // 랜덤 좌표 설정
+		for (int i = 0; i < hp; ++i)
 		{
-			x++;
-		}
-		else
-		{
-			y++;
-		}
-	}
-
-	RandShips(D_Hp); //Destroyer2 랜덤 좌표 설정
-	for (int i = 0; i < D_Hp; ++i)
-	{
-		m_Destroyer[1].AddPosition(x, y);
-		m_Map.SetPos(x, y);
-		if (horizon)
-		{
-			x++;
-		}
-		else
-		{
-			y++;
+			m_Ship[ship_idx]->AddPosition(m_GenerateX, m_GenerateY);
+			m_Map.SetPosValue(m_GenerateX, m_GenerateY, SHIP);
+			if (m_GenerateDir)
+			{
+				m_GenerateX++;
+			}
+			else
+			{
+				m_GenerateY++;
+			}
 		}
 	}
 }
@@ -108,36 +50,34 @@ void Player::SetupShips()
 void Player::PrintShips()
 //모든 배들의 좌표를 출력
 {
-	m_Aircraft.PrintPos();
-	m_Battleship.PrintPos();
-	m_Cruiser.PrintPos();
-	m_Destroyer[0].PrintPos();
-	m_Destroyer[1].PrintPos();
+	for (int i = 0; i < GetShipNum(); i++)
+	{
+		m_Ship[i]->PrintPos();
+	}
 }
 
 void Player::RandShips(int Ship_Hp)
 {
-	//배들의 좌표를 랜덤하게 설정한다.
-	srand((unsigned int)time(NULL));
+	//배들의 시작 좌표를 랜덤하게 설정한다.
 	bool checker = true;
 	int x_buffer, y_buffer;
 
 	while (checker)
 	{
-		x = rand() % MAP_SIZE + 'A';
-		y = rand() % MAP_SIZE + '1';
-		horizon = rand() % 2 ? true : false; //가로면 true 세로면 false
+		m_GenerateX = rand() % MAP_SIZE + 'A';
+		m_GenerateY = rand() % MAP_SIZE + '1';
+		m_GenerateDir = rand() % 2 ? true : false; //가로면 true 세로면 false
 		//for문을 위한 buffer
-		x_buffer = x + Ship_Hp;
-		y_buffer = y + Ship_Hp;
+		x_buffer = m_GenerateX + Ship_Hp;
+		y_buffer = m_GenerateY + Ship_Hp;
 
-		if (horizon)
+		if (m_GenerateDir)
 		{
 			if (x_buffer <= 'H')
 			{
-				for (; x < x_buffer; ++x)
+				for (; m_GenerateX < x_buffer; ++m_GenerateX)
 				{
-					if (m_Map.ShipCheck(x, y))
+					if (m_Map.GetPosValue(m_GenerateX, m_GenerateY))
 					{
 						checker = true;
 						break;
@@ -146,15 +86,15 @@ void Player::RandShips(int Ship_Hp)
 						checker = false;
 				}
 			}
-			x = x - Ship_Hp;
+			m_GenerateX = m_GenerateX - Ship_Hp;
 		}
 		else
 		{
 			if (y_buffer <= '8')
 			{
-				for (; y < y_buffer; ++y)
+				for (; m_GenerateY < y_buffer; ++m_GenerateY)
 				{
-					if (m_Map.ShipCheck(x, y))
+					if (m_Map.GetPosValue(m_GenerateX, m_GenerateY))
 					{
 						checker = true;
 						break;
@@ -163,7 +103,7 @@ void Player::RandShips(int Ship_Hp)
 						checker = false;
 				}
 			}
-			y = y - Ship_Hp;
+			m_GenerateY = m_GenerateY - Ship_Hp;
 		}
 	}
 
@@ -181,18 +121,6 @@ Position Player::Attack()
 
 	return attackPos;
 
-	//if (hit == AIRCRAFT_DESTROY)
-	//	printf_s("Aircraft Destroy");
-	//else if (hit == BATTLESHIP_DESTROY)
-	//	printf_s("Battleship Destroy");
-	//else if (hit == CRUISER_DESTROY)
-	//	printf_s("Cruiser Destroy");
-	//else if (hit == DESTROYER_DESTROY)
-	//	printf_s("Destroyer Destroy");
-	//else if (hit == HIT)
-	//	printf_s("Hit");
-	//else
-	//	printf_s("Miss");
 }
 
 Map Player::Defend()
