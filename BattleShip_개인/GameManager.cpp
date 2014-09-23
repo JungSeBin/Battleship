@@ -57,6 +57,12 @@ void GameManager::GameStart()
 
 bool GameManager::InValidAttackPosCheck(Position pos, Board* board, int x, int y)
 {
+	if (board == nullptr)
+	{
+		printf_s("board not found!");
+		return true;
+	}
+
 	if (pos.y >= 'a' + BOARD_ROW || pos.y < 'a' || //공격 좌표가 맵을 벗어나는지 체크
 		pos.x >= '1' + BOARD_COL || pos.x < '1')
 	{
@@ -74,6 +80,16 @@ bool GameManager::InValidAttackPosCheck(Position pos, Board* board, int x, int y
 
 void GameManager::GameTurn(Player* attackPlayer, Player* defendPlayer, Board* defendBoard, std::string playerName, int x, int y)
 {
+	if (attackPlayer == nullptr || defendPlayer == nullptr)
+	{
+		printf_s("player not found!");
+		return;
+	}
+	if (defendBoard == nullptr)
+	{
+		printf_s("board not found!");
+		return;
+	}
 	Position attackPos;
 	HitResult hitResult;
 	if (attackPlayer->GetPlayerType() == USER_PLAYER)
@@ -108,6 +124,11 @@ void GameManager::GameTurn(Player* attackPlayer, Player* defendPlayer, Board* de
 
 void GameManager::UpdateBoard(Player* player)
 {
+	if (player == nullptr)
+	{
+		printf_s("player not found!");
+		return;
+	}
 	//Player 의 Board를 Manager의 보드로 복사
 	m_BoardUI->SetBoard(player->GetBoard());
 }
@@ -161,6 +182,16 @@ void GameManager::SetPlayerByGameMode()
 
 void GameManager::SetupShips(Player* player, Board* board)
 {
+	if (player == nullptr)
+	{
+		printf_s("player not found!");
+		return;
+	}
+	if (board == nullptr)
+	{
+		printf_s("board not found!");
+		return;
+	}
 	DirPosition setPosition;
 	int shipHp;
 
@@ -248,6 +279,12 @@ void GameManager::GameLoop()
 
 bool GameManager::InvalidSetPosCheck(Board* board, int shipHp, DirPosition setPosition, std::string shipName)
 {
+	if (board == nullptr)
+	{
+		printf_s("board not found!"); //board가 nullptr인지 체크
+		return true;
+	}
+
 	if (setPosition.pos.y < 'a' || setPosition.pos.y >= 'a' + BOARD_ROW
 		|| setPosition.pos.x < '1' || setPosition.pos.x >= '1' + BOARD_COL) //입력된 좌표가 맵을 벗어나는지 체크
 	{

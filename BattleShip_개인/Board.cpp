@@ -40,6 +40,13 @@ Position Board::ReturnPosAtoi(Position pos)
 {
 	// 맵을 벗어나는 좌표이면 assert로 중지
 	assert((IsValidPos(pos)));
+	//Release 모드에서 작동 / 맵을 벗어나면 (0,0)으로 리턴
+	if (!(IsValidPos(pos)))
+	{
+		pos.x = 0;
+		pos.y = 0;
+		return pos;
+	}
 
 	pos.x -= '1';
 	pos.y -= 'a';

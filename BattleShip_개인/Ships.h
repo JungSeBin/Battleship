@@ -8,7 +8,7 @@ public:
 	virtual ~Ships();
 
 public:
-	void		ResetPos()					{ memset(m_Pos, 0, sizeof(Position)* POS_MAX_SIZE); }
+	void		ResetPos();
 	void		ResetNowHp()				{ m_NowHp = m_MaxHp; }
 	Position	GetPos(int i);
 	std::string GetName()					{ return m_Name; }

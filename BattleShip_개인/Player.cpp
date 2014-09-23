@@ -4,7 +4,7 @@
 
 
 Player::Player()
-:m_PlayerHp(0), m_Board(nullptr), m_Name()
+:m_PlayerHp(0), m_Board(nullptr), m_Name(), m_Type(NONE_PLAYER)
 {
 	m_ShipList.push_back(new Aircraft());
 	m_ShipList.push_back(new Battleship());
@@ -40,6 +40,17 @@ void Player::SetupShip(DirPosition generatePos, int shipNum)
 { 
 	assert(generatePos.dir != NONEDIR ); // 배의 배치시작좌표가 방향이 없으면 중지
 	assert(shipNum >= 0 && shipNum < TOTAL_COUNT); // shipNum이 0보다 작거나 배의 개수보다 많으면 중지
+
+	if (generatePos.dir == NONEDIR)
+	{
+		printf_s("Direction Error");
+		return;
+	}
+	if (shipNum < 0 && shipNum >= TOTAL_COUNT)
+	{
+		printf_s("ShipNum Error");
+		return;
+	}
 
 	for (int i = 0; i < m_ShipList[shipNum]->GetMaxHp(); ++i)
 	{
@@ -159,12 +170,24 @@ Ships* Player::GetShip(int i)
 {
 	assert(i >= 0 && i < TOTAL_COUNT); //index값이 0보다 작거나 배의 개수보다 크면 중지
 
+	//Release 모드에서 index가 범위를 벗어나면 0으로 초기화
+	if (i < 0 || i > TOTAL_COUNT)
+	{
+		i = 0;
+	}
+
 	return m_ShipList[i];
 }
 
 int Player::GetShipHp(int i)
 {
 	assert(i >= 0 && i < TOTAL_COUNT); // index값이 0보다 작거나 배의 개수보다 크면 중지
+
+	//Release 모드에서 index가 범위를 벗어나면 0으로 초기화
+	if (i < 0 || i > TOTAL_COUNT)
+	{
+		i = 0;
+	}
 
 	return m_ShipList[i]->GetMaxHp();
 }
